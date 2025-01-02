@@ -1,0 +1,39 @@
+a, li, span, i {
+    color: #052D23 !important;
+}
+
+.main-sidebar {
+    background-color: white !important;
+}
+
+.nav-item .active,
+button {
+    background-color: #2fbc94 !important;
+    border: none !important;
+    color: #052D23 !important;
+}
+
+.page-actions a {
+    background-color: #2fbc94 !important;
+    color: #052D23 !important;
+    font-weight: 600;
+}
+.brand-link{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.brand-link .brand-image {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 100px !important;
+    margin: auto;
+}
+
+.help-block .errorlist li{
+    color: red !important;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable,.dropdown-item:hover,.btn-block{
+    background-color: #2fbc94 !important;
+}
