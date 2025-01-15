@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from .models import *
 
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ['id', 'logo','name']
+
 class HomepageContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = HomepageContent
@@ -71,7 +77,7 @@ class OurProcesSerializer(serializers.ModelSerializer):
 class CaseStudySerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseStudy
-        fields = ['id', 'hero_title', 'hero_image']
+        fields = ['id', 'hero_title', 'hero_image', 'slug']
 
 class ExpertiseItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -88,8 +94,8 @@ class CaseStudyDetailSerializer(serializers.ModelSerializer):
     case_study_images = CaseStudyImagesSerializer(many=True, source='casestudyimages_set')
     class Meta:
         model = CaseStudy
-        fields = ['id', 'hero_title', 'hero_subtitle', 'hero_image', 'location'
-            'about_description', 'approach_description', 'expertise_items', 'case_study_images']
+        fields = ['id', 'hero_title', 'hero_subtitle', 'hero_image', 'location',
+            'about_description', 'approach_description', 'expertise_items', 'case_study_images','meta_title', 'meta_description']
 
 class ServiceItemsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -97,31 +103,31 @@ class ServiceItemsSerializer(serializers.ModelSerializer):
         fields = ['id', 'services', 'title', 'icon', 'description']
 
 class ServicesListingSerializer(serializers.ModelSerializer):
-    expertise_items = serializers.SerializerMethodField()
+    service_items = ServiceItemsSerializer(many=True, source='serviceitems_set')
     class Meta:
         model = Services
-        fields = ['id', 'name', 'title', 'description']
+        fields = ['id', 'name', 'title', 'description', 'slug', 'service_items', 'meta_title', 'meta_description']
 
-    def get_expertise_items(self, obj):
+    def get_service_items(self, obj):
         items = obj.serviceitems_set.all()[:3]
         return ServiceItemsSerializer(items, many=True).data
 
 class ServicesDetailSerializer(serializers.ModelSerializer):
-    expertise_items = ServiceItemsSerializer(many=True, source='serviceitems_set')
+    service_items = ServiceItemsSerializer(many=True, source='serviceitems_set')
 
     class Meta:
         model = Services
-        fields = ['id', 'name', 'title', 'description', 'expertise_items']
+        fields = ['id', 'name', 'title', 'description', 'slug', 'service_items',  'meta_title', 'meta_description']
 
 
 class JobPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPost
-        fields =  ['id', 'job_title', 'job_description', 'location', 'job_type']
+        fields =  ['id', 'job_title', 'job_description','contents', 'location', 'job_type']
 
 class ApplicationsSerializer(serializers.ModelSerializer):
     date_added = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = Applications
         fields = ['id', 'position', 'name', 'number', 'email', 'location', 'cv', 'date_added']

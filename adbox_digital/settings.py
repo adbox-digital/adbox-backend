@@ -27,10 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',bool)
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -132,14 +131,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-if DEBUG:
-  STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] if DEBUG else []
+
+# Always define STATIC_ROOT for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -227,6 +226,8 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
+        "dashboard.Brand": "fas fa-tag",
+        "dashboard.OurProces": "fas fa-cogs",  
         "dashboard.testimonial": "fas fa-quote-right",
         "dashboard.faq": "fas fa-question-circle",
         "dashboard.blog": "fas fa-blog",
@@ -252,6 +253,7 @@ JAZZMIN_SETTINGS = {
     "custom_css": "css/custom_admin.css",
     "custom_js": None,
     "order_with_respect_to": [
+        "dashboard.Brand",
         "dashboard.testimonial",
         "dashboard.faq", 
         "dashboard.blog",
@@ -264,6 +266,7 @@ JAZZMIN_SETTINGS = {
         "dashboard.casestudyimages",
         "dashboard.services",
         "dashboard.serviceitems",
+        "dashboard.OurProces",
         "dashboard.jobpost",
         "dashboard.applications",
         "dashboard.enquiry"
