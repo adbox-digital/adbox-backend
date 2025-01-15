@@ -4,6 +4,10 @@ from django.utils import timezone
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.translation import gettext_lazy as _ 
 from utils.helper import OptimalImageField
+from django.core.exceptions import ValidationError
+from django.utils.html import format_html
+
+
 # Create your models here.
 
 class BaseModel(models.Model):
@@ -21,6 +25,18 @@ class BaseModel(models.Model):
         super(BaseModel, self).save(*args, **kwargs)
 
 
+class Brand(BaseModel):
+    name = models.CharField(max_length=255, blank = True, null = True)
+    logo = models.FileField(upload_to='brands')
+    
+    class Meta:
+        db_table = 'brand'
+        verbose_name = 'Brand'
+        verbose_name_plural = 'Brands'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return self.name if self.name else str(self.id)
 
 class Testimonial(BaseModel):
     class TestimonialType(models.TextChoices):
@@ -162,7 +178,7 @@ class Gallery(BaseModel):
 
 class OurApproach(BaseModel):
     title = models.CharField(max_length=255)
-    description = CKEditor5Field('Description', config_name='extends')
+    description = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'our_approach'
@@ -187,9 +203,9 @@ class OurProces(BaseModel):
     def __str__(self):
         return self.title if self.title else str(self.id)
 
-class CaseStudy(models.Model):
+class CaseStudy(BaseModel):
     # Hero Section
-    hero_title = models.CharField(max_length=255, help_text="Main title displayed in the hero section.")
+    hero_title = models.CharField(max_length=255, help_text="Main title displayed in the hero section.", verbose_name="Case Study Title"  )
     hero_subtitle = models.CharField(max_length=255, help_text="Subtitle displayed in the hero section.")
     hero_image = OptimalImageField(
         upload_to='case_study/hero/',
@@ -211,7 +227,9 @@ class CaseStudy(models.Model):
         config_name='extends',
         help_text="Detailed description for the Approach section."
     )
-    
+    slug = models.SlugField(unique=True)
+    meta_title = models.CharField(max_length=300, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
     
     class Meta:
         db_table = "case_study"
@@ -254,7 +272,12 @@ class CaseStudyImages(BaseModel):
 class Services(BaseModel):
     name = models.CharField(max_length=255, help_text="Your Service eg:STRATEGY")
     title = models.CharField(max_length=255, help_text="",blank=True, null=True)
+    is_home = models.BooleanField(default=False, help_text="Display on the home page.")
+    home_page_descrption = models.TextField(blank=True, null=True, help_text="Description for the home page.")
     description = CKEditor5Field('Description', config_name='extends')
+    slug = models.SlugField(unique=True,)
+    meta_title = models.CharField(max_length=300, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = "services"
@@ -283,8 +306,9 @@ class JobPost(BaseModel):
     max_length=255,
     help_text="Title of the job position."
     )
-    job_description = CKEditor5Field(
-        'Job Description',
+    job_description = models.TextField(blank=True, null=True,help_text="Detailed description of the job.")
+    contents = CKEditor5Field(
+        'Contents',
         config_name='extends',
         help_text="Detailed description of the job."
     )

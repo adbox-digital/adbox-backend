@@ -1,6 +1,13 @@
 from django.contrib import admin
 from .models import *
 
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('name', 'logo', 'date_added', 'is_deleted')
+    list_filter = ('is_deleted',)
+    search_fields = ('name',)
+    readonly_fields = ('date_added', 'date_updated') 
+
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'work_category', 'date_added', 'is_deleted')
@@ -61,19 +68,26 @@ class OurProcessAdmin(admin.ModelAdmin):
 class CaseStudyAdmin(admin.ModelAdmin):
     list_display = ('hero_title', 'location')
     search_fields = ('hero_title', 'hero_subtitle', 'location')
+    prepopulated_fields = {'slug': ('hero_title',)}
 
 @admin.register(ExpertiseItem)
 class ExpertiseItemAdmin(admin.ModelAdmin):
     list_display = ('expertise_items', 'case_study', 'date_added', 'is_deleted')
-    list_filter = ('case_study', 'is_deleted')
+    list_filter = ('case_study__hero_title', 'is_deleted')
     search_fields = ('expertise_items',)
     readonly_fields = ('date_added', 'date_updated')
 
 @admin.register(CaseStudyImages)
 class CaseStudyImagesAdmin(admin.ModelAdmin):
     list_display = ('image_alt', 'case_study', 'date_added', 'is_deleted')
-    list_filter = ('case_study', 'is_deleted')
+    list_filter = ('case_study__hero_title', 'is_deleted')
     search_fields = ('image_alt',)
+    readonly_fields = ('date_added', 'date_updated')
+
+class ServiceItemsInline(admin.TabularInline): 
+    model = ServiceItems
+    extra = 0
+    fields = ('title', 'icon', 'description', 'is_deleted') 
     readonly_fields = ('date_added', 'date_updated')
 
 @admin.register(Services)
@@ -81,12 +95,14 @@ class ServicesAdmin(admin.ModelAdmin):
     list_display = ('name', 'title', 'date_added', 'is_deleted')
     list_filter = ('is_deleted',)
     search_fields = ('name', 'title', 'description')
+    prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('date_added', 'date_updated')
+    inlines = [ServiceItemsInline] 
 
 @admin.register(ServiceItems)
 class ServiceItemsAdmin(admin.ModelAdmin):
     list_display = ('title', 'services', 'date_added', 'is_deleted')
-    list_filter = ('services', 'is_deleted')
+    list_filter = ('services__name', 'is_deleted')
     search_fields = ('title', 'description')
     readonly_fields = ('date_added', 'date_updated')
 

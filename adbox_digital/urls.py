@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.views.static import serve
+from django.shortcuts import redirect
 
 admin.site.site_header = "Adbox Admin"
 admin.site.site_title = "Adbox Admin"
@@ -25,6 +26,7 @@ admin.site.index_title = "Welcome to Adbox Admin Portal"
 
 
 urlpatterns = [
+    path('', lambda request: redirect('/admin/')),
     path('admin/', admin.site.urls),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('api/v1/client/', include('client.urls')),
