@@ -126,3 +126,11 @@ class EnquiryAdmin(admin.ModelAdmin):
     list_filter = ('is_deleted',)
     search_fields = ('name', 'email', 'message')
     readonly_fields = ('date_added', 'date_updated')
+    
+    
+@admin.register(SEO)
+class SEOAdmin(admin.ModelAdmin):
+    list_display = ('page', 'path')
+    list_filter = ('page', 'path', 'is_deleted')
+    search_fields = ('page', 'path')
+    ordering = ('-date_added',)

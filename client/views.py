@@ -579,3 +579,39 @@ class JobEnquiryAPIView(APIView):
                 "error": str(e)
             }
         return Response(response_data, status=status.HTTP_200_OK)
+    
+    
+class SeoListAPIView(APIView):
+    """
+    Get Seo details for user side
+    """
+    model = dashboard_model.SEO
+    serializer_class = dashboard_serializer.SEOSerializer
+
+    def get(self, request):
+        path = request.query_params.get('path', None)
+        try:
+            if path:
+                queryset = self.model.objects.filter(path=path)
+            else:
+                queryset = self.model.objects.filter(is_deleted=False)
+            
+            serializer = self.serializer_class(queryset, many=True, context={'request': request})
+
+            response_data = {
+                "StatusCode": 6000,
+                "detail": "Success",
+                "data": serializer.data,
+                "message": "SEO's Data fetched successfully"
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error fetching SEO details: {str(e)}")
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "Error",
+                "data": "",
+                "message": f"Something went wrong: {str(e)}"
+            }
+            return Response(response_data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
