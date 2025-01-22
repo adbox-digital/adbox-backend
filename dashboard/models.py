@@ -28,6 +28,7 @@ class BaseModel(models.Model):
 class Brand(BaseModel):
     name = models.CharField(max_length=255, blank = True, null = True)
     logo = models.FileField(upload_to='brands')
+    image_alt = models.CharField(max_length=255, blank=True, null=True)
     
     class Meta:
         db_table = 'brand'
@@ -191,6 +192,7 @@ class OurApproach(BaseModel):
 
 class OurProces(BaseModel):
     icon = models.FileField(upload_to='our_proces', null=True, blank=True)
+    image_alt = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(max_length=255)
     description = CKEditor5Field('Description', config_name='extends')
 
@@ -213,6 +215,7 @@ class CaseStudy(BaseModel):
         max_dimensions=(1920, 1080),
         blank=True, null=True
     )
+    image_alt = models.CharField(max_length=200, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     # About Section
     about_description = CKEditor5Field(
