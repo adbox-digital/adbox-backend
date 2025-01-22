@@ -144,3 +144,8 @@ class EnquirySerializer(serializers.ModelSerializer):
 
     def get_date_added(self, obj):
         return obj.date_added.strftime("%d %b %Y") if obj.date_added else None
+
+class SEOSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SEO  
+        fields = ['id', 'page', 'path', 'meta_title','meta_description']

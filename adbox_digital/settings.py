@@ -242,7 +242,8 @@ JAZZMIN_SETTINGS = {
         "dashboard.serviceitems": "fas fa-list",
         "dashboard.jobpost": "fas fa-briefcase",
         "dashboard.applications": "fas fa-file-alt",
-        "dashboard.enquiry": "fas fa-envelope"
+        "dashboard.enquiry": "fas fa-envelope",
+        "dashboard.SEO": "fas fa-search",
     },
     
     "default_icon_parents": "fas fa-chevron-circle-right",
