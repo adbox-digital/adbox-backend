@@ -5,7 +5,7 @@ from .models import *
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = ['id', 'logo','name']
+        fields = ['id', 'logo','name', 'image_alt']
 
 class HomepageContentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,12 +72,12 @@ class OurApproachSerializer(serializers.ModelSerializer):
 class OurProcesSerializer(serializers.ModelSerializer):
     class Meta:
         model = OurProces
-        fields = ['id', 'icon', 'title', 'description']
+        fields = ['id', 'icon', 'title', 'description', 'image_alt']
 
 class CaseStudySerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseStudy
-        fields = ['id', 'hero_title', 'hero_image', 'slug']
+        fields = ['id', 'hero_title', 'hero_image', 'slug', 'image_alt']
 
 class ExpertiseItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -94,7 +94,7 @@ class CaseStudyDetailSerializer(serializers.ModelSerializer):
     case_study_images = CaseStudyImagesSerializer(many=True, source='casestudyimages_set')
     class Meta:
         model = CaseStudy
-        fields = ['id', 'hero_title', 'hero_subtitle', 'hero_image', 'location',
+        fields = ['id', 'hero_title', 'hero_subtitle', 'hero_image', 'image_alt', 'location',
             'about_description', 'approach_description', 'expertise_items', 'case_study_images','meta_title', 'meta_description']
 
 class ServiceItemsSerializer(serializers.ModelSerializer):
