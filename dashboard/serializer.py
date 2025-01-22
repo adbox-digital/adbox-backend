@@ -123,7 +123,7 @@ class ServicesDetailSerializer(serializers.ModelSerializer):
 class JobPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPost
-        fields =  ['id', 'job_title', 'job_description','contents', 'location', 'job_type']
+        fields =  ['id', 'job_title', 'job_description','contents', 'location', 'job_type', 'meta_title', 'meta_description']
 
 class ApplicationsSerializer(serializers.ModelSerializer):
     date_added = serializers.SerializerMethodField()

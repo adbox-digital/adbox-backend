@@ -327,6 +327,8 @@ class JobPost(BaseModel):
         null=True,
         help_text="Type of job, e.g., Full-time, Part-time, etc."
     )
+    meta_title = models.CharField(max_length=300, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
     class Meta:
         db_table = "job_post"
         verbose_name = "Job Post"
