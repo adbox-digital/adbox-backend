@@ -10,6 +10,7 @@ urlpatterns = [
     path('gallery/', views.GalleryAPIView.as_view(), name='gallery-get'),
     path('our-approach/', views.OurApproachAPIView.as_view(), name='our-approach-get'),
     path('our-proces/', views.OurProcesAPIView.as_view(), name='our-proces-get'),
+    path('seo/', views.SeoListAPIView.as_view(), name='seo-get'),
 
     path('services/', views.ServicesAPIView.as_view(), name='services-get'),
     path('services/<slug:slug>', views.ServicesAPIView.as_view(), name='services-get'),
