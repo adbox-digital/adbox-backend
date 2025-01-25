@@ -294,6 +294,7 @@ class ServiceItems(BaseModel):
     services = models.ForeignKey(Services, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, help_text="")
     icon = models.FileField(upload_to='service/item', blank=True, null=True)
+    image_alt = models.CharField(max_length=200, blank=True, null=True)
     description = CKEditor5Field('Description', config_name='extends')
 
     class Meta:
