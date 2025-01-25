@@ -100,7 +100,7 @@ class CaseStudyDetailSerializer(serializers.ModelSerializer):
 class ServiceItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceItems
-        fields = ['id', 'services', 'title', 'icon', 'description']
+        fields = ['id', 'services', 'title', 'icon', 'description', 'image_alt']
 
 class ServicesListingSerializer(serializers.ModelSerializer):
     service_items = ServiceItemsSerializer(many=True, source='serviceitems_set')
