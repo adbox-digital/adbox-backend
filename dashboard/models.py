@@ -216,6 +216,14 @@ class CaseStudy(BaseModel):
         blank=True, null=True
     )
     image_alt = models.CharField(max_length=200, blank=True, null=True)
+    bg_image = OptimalImageField(
+        upload_to='case_study/hero/',
+        size_threshold_kb=600,  
+        max_dimensions=(1920, 1080),
+        blank=True, null=True,
+        help_text="Background image displayed in the hero section."
+    )
+    bg_image_alt = models.CharField(max_length=200, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
     # About Section
     about_description = CKEditor5Field(
