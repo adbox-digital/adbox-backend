@@ -64,11 +64,24 @@ class OurProcessAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     readonly_fields = ('date_added', 'date_updated')
 
+class ExpertiseItemInline(admin.TabularInline):
+    model = ExpertiseItem
+    extra = 0
+    fields = ('expertise_items', 'is_deleted', 'date_added')
+    readonly_fields = ('date_added', 'date_updated')
+
+class CaseStudyImagesInline(admin.TabularInline):
+    model = CaseStudyImages
+    extra = 0
+    fields = ('image', 'image_alt', 'is_deleted', 'date_added')
+    readonly_fields = ('date_added', 'date_updated')
+
 @admin.register(CaseStudy)
 class CaseStudyAdmin(admin.ModelAdmin):
     list_display = ('hero_title', 'location')
     search_fields = ('hero_title', 'hero_subtitle', 'location')
     prepopulated_fields = {'slug': ('hero_title',)}
+    inlines = [ExpertiseItemInline, CaseStudyImagesInline]  
 
 @admin.register(ExpertiseItem)
 class ExpertiseItemAdmin(admin.ModelAdmin):

@@ -37,3 +37,6 @@ button {
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable,.dropdown-item:hover,.btn-block{
     background-color: #2fbc94 !important;
 }
+.ck-editor-container{
+    width: 800px !important;
+}

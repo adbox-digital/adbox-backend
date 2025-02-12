@@ -94,7 +94,7 @@ class CaseStudyDetailSerializer(serializers.ModelSerializer):
     case_study_images = CaseStudyImagesSerializer(many=True, source='casestudyimages_set')
     class Meta:
         model = CaseStudy
-        fields = ['id', 'hero_title', 'hero_subtitle', 'hero_image', 'image_alt', 'location',
+        fields = ['id', 'hero_title', 'hero_subtitle', 'bg_image', 'bg_image_alt', 'location',
             'about_description', 'approach_description', 'expertise_items', 'case_study_images','meta_title', 'meta_description']
 
 class ServiceItemsSerializer(serializers.ModelSerializer):
