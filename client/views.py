@@ -442,10 +442,10 @@ class ServiceEnquiryAPIView(APIView):
                 }
                 template = get_template('enquiry.html').render(context, request=request)
                 send_mail(
-                    'Enquiry Data',
+                    'Enquiry Data from adbox.in',
                     None, 
                     settings.EMAIL_HOST_USER,
-                    ['muhammadsifan.accolades@gmail.com'],
+                    ['adboxdigitalagency@gmail.com'],
                     fail_silently=False,
                     html_message = template,
                     )
@@ -549,10 +549,10 @@ class JobEnquiryAPIView(APIView):
                 }
                 template = get_template('career_enquiry.html').render(context, request=request)
                 send_mail(
-                    'Enquiry Data',
+                    'Job Enquiry from adbox.in',
                     None, 
                     settings.EMAIL_HOST_USER,
-                    ['muhammadsifan.accolades@gmail.com'],
+                    ['adboxdigitalagency@gmail.com'],
                     fail_silently=False,
                     html_message = template,
                     )
