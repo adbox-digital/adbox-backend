@@ -43,12 +43,17 @@ class AcademyBlogsAPIView(APIView):
                     context={'request': request}
                 )
 
-                related_blogs = self.model.objects.filter(is_deleted=False).exclude(slug=slug).values('title', 'slug', 'date_added')[:3]
+                related_blogs = self.model.objects.filter(is_deleted=False).exclude(slug=slug)[:3]
+                related_serializer = academy_serializer.AcademyRelatedBlogSerializer(
+                    related_blogs, 
+                    many=True, 
+                    context={'request': request}
+                )
                 response_data = {
                     "StatusCode": 6000,
                     "details": "Success",
                     "data": serializer.data,
-                    "related_blogs": related_blogs,
+                    "related_blogs": related_serializer.data,
                     "message": "Academy blog details retrieved successfully"
                 }
                 return Response(response_data, status=status.HTTP_200_OK)

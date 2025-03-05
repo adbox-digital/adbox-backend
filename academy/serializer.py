@@ -12,6 +12,16 @@ class AcademyBlogSerializer(serializers.ModelSerializer):
         return obj.date_added.strftime("%d %b %Y") if obj.date_added else None
 
 
+class AcademyRelatedBlogSerializer(serializers.ModelSerializer):
+    date_added = serializers.SerializerMethodField()
+    class Meta:
+        model = AcademyBlog
+        fields = ['id', 'title', 'slug', 'date_added']
+
+    def get_date_added(self, obj):
+        return obj.date_added.strftime("%d %b %Y") if obj.date_added else None
+
+
 class AcademyBlogDetailSerializer(serializers.ModelSerializer):
     date_added = serializers.SerializerMethodField()
 
