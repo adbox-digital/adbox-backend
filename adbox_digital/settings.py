@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'dashboard',
     'client',
+    'academy',
 
     'rest_framework',
     'django_ckeditor_5',
@@ -222,6 +223,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"model": "dashboard.Enquiry"},
         {"app": "dashboard"},
+        {"app": "academy"},
     ],
     "icons": {
         "auth": "fas fa-users-cog",
@@ -245,6 +247,10 @@ JAZZMIN_SETTINGS = {
         "dashboard.applications": "fas fa-file-alt",
         "dashboard.enquiry": "fas fa-envelope",
         "dashboard.SEO": "fas fa-search",
+        
+        "academy.AcademyFAQ": "fas fa-question-circle",
+        "academy.AcademyBlog": "fas fa-blog",
+        "academy.AcademyEnquiry": "fas fa-envelope",
     },
     
     "default_icon_parents": "fas fa-chevron-circle-right",
@@ -255,6 +261,10 @@ JAZZMIN_SETTINGS = {
     "custom_css": "css/custom_admin.css",
     "custom_js": None,
     "order_with_respect_to": [
+        "academy.AcademyFAQ", 
+        "academy.AcademyBlog",
+        "academy.AcademyEnquiry",
+        
         "dashboard.Brand",
         "dashboard.testimonial",
         "dashboard.faq", 
@@ -271,7 +281,8 @@ JAZZMIN_SETTINGS = {
         "dashboard.OurProces",
         "dashboard.jobpost",
         "dashboard.applications",
-        "dashboard.enquiry"
+        "dashboard.enquiry",
+        
     ],
     "navigation_expanded": True,
     "hide_apps": [],

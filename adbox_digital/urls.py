@@ -31,6 +31,7 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('api/v1/client/', include('client.urls')),
     path('api/v1/dashboard/', include('dashboard.urls')),
+    path('api/v1/academy/', include('academy.urls')),
 
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
