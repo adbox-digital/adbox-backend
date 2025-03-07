@@ -125,7 +125,35 @@ class AcademyFaqAPIView(APIView):
                 "error": str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
-            
+class GalleryAPIView(APIView):
+    """
+    API view for fetching Gallery for users.
+    """
+    models = academy_model.AcademyGallery
+    serializers_class = academy_serializer.AcademyGallerySerializer
+    def get(self, request):
+        try:
+
+            queryset = self.models.objects.filter(is_deleted=False)
+            serializer = self.serializers_class(queryset, many=True, context={'request': request})
+
+            response_data = {
+                "StatusCode" : 6000,
+                "details" : "Success",
+                "data" : serializer.data,
+                "message" : "Gallery images fetched successfully"
+            }
+            return Response(response_data,status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f"Error retrieving Gallery: {str(e)}")
+            return Response({
+                "StatusCode": 6002,
+                "api": request.get_full_path(),
+                "details": "Error",
+                "message": "Failed to retrieve Gallery",
+                "error": str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                    
 class AcademyEnquiryAPIView(APIView):
     def post(self,request):
         try:

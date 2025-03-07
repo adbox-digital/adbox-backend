@@ -4,6 +4,7 @@ urlpatterns = [
 path('faq/', views.AcademyFaqAPIView.as_view(), name='faq-get'),
     path('blogs/', views.AcademyBlogsAPIView.as_view(), name='blog-get'),
     path('blog/<slug:slug>', views.AcademyBlogsAPIView.as_view(), name='blog-details'),
+    path('gallery/', views.GalleryAPIView.as_view(), name='gallery-get'),
     path('enquiry/', views.AcademyEnquiryAPIView.as_view(), name="user-enquiry"),
 
 ]

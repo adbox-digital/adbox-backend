@@ -39,6 +39,11 @@ class AcademyFAQSerializer(serializers.ModelSerializer):
         model = AcademyFAQ
         fields = ['id', 'question', 'answer']
 
+class AcademyGallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AcademyGallery
+        fields = ['id', 'image', 'image_alt']
+        
 class AcademyEnquirySerializer(serializers.ModelSerializer):
     date_added = serializers.SerializerMethodField()
 
