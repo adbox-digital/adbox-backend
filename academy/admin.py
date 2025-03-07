@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AcademyFAQ, AcademyEnquiry, AcademyBlog
+from .models import AcademyFAQ, AcademyEnquiry, AcademyBlog, AcademyGallery
 
 # Register your models here.
 
@@ -25,3 +25,10 @@ class EnquiryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'message')
     readonly_fields = ('date_added', 'date_updated')
     
+    
+@admin.register(AcademyGallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('image_alt', 'date_added', 'is_deleted')
+    list_filter = ('is_deleted',)
+    search_fields = ('image_alt',)
+    readonly_fields = ('date_added', 'date_updated')

@@ -56,3 +56,21 @@ class AcademyEnquiry(BaseModel):
 
     def __str__(self):
         return self.name if self.name else str(self.id)
+    
+class AcademyGallery(BaseModel):
+    image = OptimalImageField(
+        upload_to='academy/gallery/',
+        size_threshold_kb=600,  
+        max_dimensions=(1920, 1080)  ,
+        blank=True, null=True
+    )
+    image_alt = models.CharField(max_length=200, blank=True, null=True)
+
+    class Meta:
+        db_table = 'academy.gallery'
+        verbose_name = 'Gallery'
+        verbose_name_plural = 'Galleries'
+        ordering = ('-date_added',)
+
+    def __str__(self):
+        return self.image_alt if self.image_alt else str(self.id)

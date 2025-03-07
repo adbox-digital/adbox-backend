@@ -251,6 +251,7 @@ JAZZMIN_SETTINGS = {
         "academy.AcademyFAQ": "fas fa-question-circle",
         "academy.AcademyBlog": "fas fa-blog",
         "academy.AcademyEnquiry": "fas fa-envelope",
+        "academy.AcademyGallery": "fas fa-images",
     },
     
     "default_icon_parents": "fas fa-chevron-circle-right",
