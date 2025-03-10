@@ -293,7 +293,7 @@ class CaseStudyAPIView(APIView):
                 }
                 return Response(response_data, status=status.HTTP_200_OK)
 
-            queryset = self.model.objects.filter(is_deleted=False)
+            queryset = self.model.objects.filter(is_deleted=False).order_by('-date_added')
             
             serializer = self.serializers_class(
                     queryset, 
