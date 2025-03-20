@@ -100,7 +100,7 @@ class CaseStudyImagesAdmin(admin.ModelAdmin):
 class ServiceItemsInline(admin.TabularInline): 
     model = ServiceItems
     extra = 0
-    fields = ('title', 'icon', 'description', 'is_deleted') 
+    fields = ('title', 'icon', 'image_alt' ,'description', 'is_deleted') 
     readonly_fields = ('date_added', 'date_updated')
 
 @admin.register(Services)
