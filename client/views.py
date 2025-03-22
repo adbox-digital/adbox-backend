@@ -659,3 +659,5 @@ class DynamicSiteMapAPIView(APIView):
     @staticmethod
     def set_correct_url(base_url, slug):
         return f"{base_url}{slug}"
+
+
