@@ -19,6 +19,7 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.views.static import serve
 from django.shortcuts import redirect
+from django.views.generic.base import TemplateView
 
 admin.site.site_header = "Adbox Admin"
 admin.site.site_title = "Adbox Admin"
@@ -32,6 +33,7 @@ urlpatterns = [
     path('api/v1/client/', include('client.urls')),
     path('api/v1/dashboard/', include('dashboard.urls')),
     path('api/v1/academy/', include('academy.urls')),
+     path("robots.txt",TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),

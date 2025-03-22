@@ -620,3 +620,44 @@ class SeoListAPIView(APIView):
                 "message": f"Something went wrong: {str(e)}"
             }
             return Response(response_data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class DynamicSiteMapAPIView(APIView):
+    """
+    Get Dynamic Site Map for user side.
+    """
+
+    def get(self, request):
+        try:
+            urls = []
+
+            services = dashboard_model.Services.objects.filter(is_deleted=False).values_list('slug', flat=True)
+            case_studies = dashboard_model.CaseStudy.objects.filter(is_deleted=False).values_list('slug', flat=True)
+            blogs = dashboard_model.Blog.objects.filter(is_deleted=False).values_list('slug', flat=True)
+
+            urls.extend(self.set_correct_url("services/", slug) for slug in services)
+            urls.extend(self.set_correct_url("case-study/", slug) for slug in case_studies)
+            urls.extend(self.set_correct_url("blogs/", slug) for slug in blogs)
+
+            response_data = {
+                "StatusCode": 6000,
+                "detail": "Success",
+                "data": urls,
+                "message": "Dynamic Site Map fetched successfully"
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            logger.error(f"Error fetching Dynamic Site Map: {str(e)}")
+            response_data = {
+                "StatusCode": 6002,
+                "detail": "Error",
+                "data": [],
+                "message": f"Something went wrong: {str(e)}"
+            }
+            return Response(response_data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @staticmethod
+    def set_correct_url(base_url, slug):
+        return f"{base_url}{slug}"
+
+
