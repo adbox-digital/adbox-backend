@@ -23,4 +23,6 @@ urlpatterns = [
     path('job-post/', views.JobPostAPIView.as_view(), name="job-post-enquiry"),
     path('job-post/<uuid:id>', views.JobPostAPIView.as_view(), name="job-post-enquiry"),
 
+    path('dynamic-sitemap/', views.DynamicSiteMapAPIView.as_view(), name="dynamicsite-map"),
+
 ]
