@@ -33,7 +33,7 @@ urlpatterns = [
     path('api/v1/client/', include('client.urls')),
     path('api/v1/dashboard/', include('dashboard.urls')),
     path('api/v1/academy/', include('academy.urls')),
-     path("robots.txt",TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
+    path("robots.txt",TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),),
 
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
